@@ -1,19 +1,32 @@
-#+Title: Annolet: Web Annotation Tool
+#+Title: AnnoLet! Web Annotation Tool
 #+AUTHOR: Raghav Mittal
+#+EMAIL:raghav.mittal@st.niituniversity.in
 
-* 
-  The source is written in JavaScript and jQuery 1.7 is used in it.
-  I am trying to make it more scalable and robust, so that it can 
-  be easily integrated with other projects.
+  The source is written in JavaScript and jQuery 1.7 is used in it. I am trying to make it more scalable and robust, 
+  so that it can be easily integrated with other projects.
 
-** use of =jQuery.noConflict()=
-   To make the program more robust and avoid clash between variables with that running website
+  To run this program call =annolet_main()= function.
+------------------------------
+** Motivation/Background
+** Design Idea
+** Functionality
+** Detailed Design
+** Function Test/Unit Test
+
+** Use of =jQuery.noConflict()=
+   To make the program more robust and avoid clash between variables with that of running website
    jQuery noConflict() is used and normal '$' selector is changed with '$j'.
    #+NAME:noconflict
    #+begin_src js :tangle yes
      var $j = jQuery.noConflict();
    #+end_src
-** function =annolet_createContainer()=
+--------------------------
+** COMMENT calling annolet_main() function
+#+begin_src js :tangle yes :exports none
+   annolet_main();
+#+end_src
+
+** Function =annolet_createContainer()=
    This function creates a continer div which let the users interact with app.
    When =annolet_createContainer= is called, it injects CSS stylesheet into =<head>= 
    element of website to stylize the container and =<div id=annolet-container>...</div>= 
@@ -36,22 +49,22 @@ function annolet_createContainer() {
     annolet_container.id = 'annolet-container';
     body.appendChild(annolet_container);
     //injecting html code
-    document.getElementById('annolet-container').innerHTML = "<ul class=annolet-tools-menu><span style='border-radius:10px;  color:orange;font-weight:bold;font-family:monospace; font-size:1.3em'>AnnoLet!</span><span style='color:grey;'>|</span><li class=annolet-tools-menu-item id=login-btn>login</li><li class=annolet-tools-menu-item id=addnote_btn onclick='annolet_btn=2;annolet_controller(annolet_btn);' >annotate</li><li class=annolet-tools-menu-item id=highlight-btn onclick='annolet_btn=1;annolet_controller(annolet_btn);'>highlight</li><li class=annolet-tools-menu-item id=save-btn>save</li><li class=annolet-tools-menu-item id=exit-btn onclick='//annolet_btn=0;annolet_controller(annolet_btn);'>exit</li></ul>"; //HTML to create a list of options
+    document.getElementById('annolet-container').innerHTML = "<ul class=annolet-tools-menu><span style='border-radius:10px;  color:orange;font-weight:bold;font-family:monospace; font-size:1.3em'>AnnoLet!</span><span style='color:grey;'>|</span><li class=annolet-tools-menu-item id=login-btn>login</li><li class=annolet-tools-menu-item id=addnote_btn onclick='annolet_btn=2;' >annotate</li><li class=annolet-tools-menu-item id=highlight-btn onclick='annolet_btn=1;'>highlight</li><li class=annolet-tools-menu-item id=save-btn>save</li><li class=annolet-tools-menu-item id=exit-btn onclick='annolet_btn=0;'>exit</li></ul>"; //HTML to create a list of options
 }
 #+end_src
-
- The container div contains following options->
-   1 login -> to let the user login, so highlights and annotations done can be saved permanently.
-   On click value of =annolet_btn= is changed to 1.
-   2 highlight -> to highlight elements. On click value of =annolet_btn= is changed to 2.
-   3 annotate -> to highlight and add note to element. On click value of =annolet_btn= is changed to 3.
-   4 Publish -> to save all work done in a session. On click value of =annolet_btn= is changed to 4.
-   5 Cancel -> to dump all the work done. On click value of =annolet_btn= is changed to 5.
-   0 exit -> to stop all functions and remove container from body. On click =annolet_btn= is changed to 0.
-
-** functions to retrieve and evaluate Xpath of seleceted DOM element
+#+begin_verse
+    _The container div contains following options_
+   - /login/: to let the user login, so highlights and annotations done can be saved permanently.On click value of =annolet_btn= is changed to 1.
+   - /highlight/: to highlight elements. On click value of =annolet_btn= is changed to 2.
+   - /annotate/: to highlight and add note to element. On click value of =annolet_btn= is changed to 3.
+   - /publish/: to save all work done in a session. On click value of =annolet_btn= is changed to 4.
+   - /cancel/: to dump all the work done. On click value of =annolet_btn= is changed to 5.
+   - /exit/: to stop all functions and remove container from body. On click =annolet_btn= is changed to 0.
+#+end_verse
+---------------------------------------
+** Functions to retrieve and evaluate Xpath of seleceted DOM element
    These functions are copied from [[https://code.google.com/p/fbug/source/browse/branches/firebug1.6/content/firebug/lib.js?spec=svn12950&r=8828#1332][Mozilla Firebug Opensource Code]]. Implemented  with small changes.
-*** =anno_getXpath(target)=
+*** Function =anno_getXpath(target)=
    It returns string containing Xpath of selected element which is passed as an argument called =target=.
 #+NAME:anno_getXpath
 #+begin_src js  :tangle yes
@@ -76,8 +89,8 @@ function anno_getXpathTo(element) {
     }
 }
 #+end_src
-   
-*** =anno_getElementByXpath(xpath)=
+--------------------------------------   
+*** Function =anno_getElementByXpath(xpath)=
     This function returns that element as object whose Xpath is passed as an argument through it.
 #+NAME:anno_getElementByXpath
 #+begin_src js :tangle yes
@@ -86,31 +99,10 @@ function anno_getElementByXpath(xpath) {
     return document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 }
 #+end_src 
-
-** selecting element, highlighting and annotating it
-*** anno_highlight()
-    This function takes two arguments as parameters, =xpath= and function =annolet_pushToStack()=.
-    Xpath of an element is passed to =anno_getElementByXpath(xpath)= which returns element in obect form.
-    Then that object is selected using jQuery and using =wrapInner()= function of jQuery it is wrapped 
-    inside =<span>= with id 'mark' and yellow background. Another function that is =annolet_pushToStack()=
-    creates an object and push it to object array.So it can be saved for future to a server.
-    =annolet_pushToStack()= will be discussed later.
-#+NAME: anno_highlight
-#+begin_src js :tangle yes
-//function for highlighting element
-function anno_highlight(xpath) {
-    //if element is already highlighted
-    if (anno_getElementByXpath(xpath).id != "mark" || !(anno_getElementByXpath(xpath).id)) {
-        // hightlight selected element, calling function
-        $j(anno_getElementByXpath(xpath)).wrapInner("<span id='mark' style='background:yellow;'></span>");
-        annolet_pushToStack(xpath);
-    } else {
-        console.log('highlighted already');
-    }
-}
-#+end_src   
-*** annolet_main()
-   =annolet_main()= is main function which will on execution, monitors document
+--------------------------------
+** Selecting, highlighting and annotating an element
+*** Function =annolet_main()=
+   =annolet_main()= is main function which will on execution calls =annolet_createContainer()= and monitors document
    for mouse clicks. On click, clicked element is selected as target which is passed through
    function =annolet_getXpath= and returned Xpath is stored in variable =xpath=.
    =annolet_main()= function always check for the current value of =annolet_btn= whenever user clicks.
@@ -127,16 +119,18 @@ function annolet_main() {
         } // for IE
         var target = 'target' in event ? event.target : event.srcElement; // for IE
         var root = document.compatMode === 'CSS1Compat' ? document.documentElement : document.body;
+        var xpath = anno_getXpathTo(target);        
         if (annolet_btn === 1) {
-            anno_highlight(target, annolet_pushToStack);
+            anno_highlight(xpath);
         } else if (annolet_btn === 2) {
-            anno_addNote(target, annolet_pushToStack);
+            console.log('not available'); //for now this function not available
         }
     };
 }
 
 #+end_src
-*** annolet_pushToStack()
+   --------------------------------
+*** Function =annolet_pushToStack()=
     This function will create an object called =annolet_obj= which will contain username, id, type(annotation or highlighting),
     content(if annotation is done) and xpath. Everytime user creates annotation or do highlighting, this function will run, so
     as to assure that all the work done is saved for retreival in future.'type' is defined to make it easy to build type 
@@ -161,10 +155,46 @@ function annolet_pushToStack(xpath, anno_content) {
     annolet_stack.push(annolet_obj);
 }
 #+end_src
-
-*** anno_annotate()
+------------------------------
+*** Function =anno_highlight()=
+    This function takes two arguments as parameters, =xpath= and function =annolet_pushToStack()=.
+    Xpath of an element is passed to =anno_getElementByXpath(xpath)= which returns element in obect form.
+    Then that object is selected using jQuery and using =wrapInner()= function of jQuery it is wrapped 
+    inside =<span>= with id 'mark' and yellow background. Another function that is =annolet_pushToStack()=
+    creates an object and push it to object array.So it can be saved for future to a server.
+    =annolet_pushToStack()= will be discussed later.
+#+NAME: anno_highlight
+#+begin_src js :tangle yes
+//function for highlighting element
+function anno_highlight(xpath) {
+    //if element is already highlighted
+    if (anno_getElementByXpath(xpath).id != "mark" || !(anno_getElementByXpath(xpath).id)) {
+        //changing background of selected element to yellow.
+        $j(anno_getElementByXpath(xpath)).wrapInner("<span id='mark' style='background:yellow;'></span>");
+        annolet_pushToStack(xpath);
+    } else {
+        console.log('highlighted already');
+    }
+}
+#+end_src   
+---------------------------------
+*** Function =anno_annotate()=
+**** /not complete/
+In this function I will use some functionality of =annolet_highlight()= function, then another function which will create 
+a div containing =textarea=. This box will add to fixed div which will slide up. There will be two options in that box, 
+1.save 
+2.cancel. 
+On clicking save, the content variable will become equal to the textarea value and then =annolet_pushToStack()= will be called. Right now there is no method for retrieval of annotations.
 #+NAME:anno_annotate
 #+begin_src js :tangle yes
-function anno_annotate(){
- return;}
+function anno_annotate(xpath){
+if (anno_getElementByXpath(xpath).id != "mark" || !(anno_getElementByXpath(xpath).id)) {
+        //adding orange coloured border around selected part.
+        $j(anno_getElementByXpath(xpath)).wrapInner("<span id='mark' style='border:solid 1px orange;'></span>");
+        annolet_pushToStack(xpath);
+    } else {
+        console.log('highlighted already');
+    }
+}
 #+end_src
+----------------------------------
