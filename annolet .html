@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <title>AnnoLet! - Web Annotation Tool</title>
+  </head>
+  <body>
+    <style>
+      body{background: #E1E1E3;
+        font-family:sans;
+        color: black;
+      }
+      #link-btn{
+        background:blue;
+        color:white;
+        display: box;
+        padding:5px;
+        text-decoration:none;
+        font-weight:bold;
+      }
+      h1 {
+        background-color: rgb(0, 0, 0);
+        color: rgb(248, 241, 241);
+        margin-top: -20px;
+        padding: 150px 10px 50px 50px;
+        width: auto;
+      }
+      #container{
+        margin:20px 10px 10px 15px;
+      }
+    </style>
+    <div id="jumbotron"><h1>AnnoLet! - Web Annotation Tool</h1></div>
+    <div id="container">
+      <h3>Drag this box to your bookmark bar</h3>
+      <a href="javascript:(function(){if(!($=window.jQuery)){
+          script=document.createElement('script');
+          script.src='//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js';
+          script.onload=initAnnoLet;
+          document.getElementsByTagName('head')[0].appendChild(script);}
+          else{initAnnoLet();}
+          function initAnnoLet(){
+              script=document.createElement('script');
+              script.src='//ba8fbd5823dec19f2a925b874342f02f325c5581.googledrive.com/host/0B0c01D4InsAOflQ0TUhidTJPUTNycmpyR0IwQ2R1RzBnSVE0SVNzLUxPeHcxOEZVM2RISzg/newfinal/annolet_main.js?v='+parseInt(Math.random()*1000);
+              document.getElementsByTagName('head')[0].appendChild(script);
+          }})()" id="link-btn">AnnoLet!</a>
+      <h5>release version 1.A</h5>
+      <p style="font-size:.9em;bottom:0;position:absolute;color:grey;">This tool is developed by <b>Raghav Mittal</b> at <b>VLeads, Software Engineering Research Center, IIIT Hyderabad.</b></p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+/*Control Menu styling*/
+.annolet-tools-menu{
+      width: 400px;
+      border: 1px #B3B3B3 solid;
+      border-radius: 15px 15px 0 0 ;
+      list-style: none;
+      padding: 5px 20px 10px 20px;
+      position: fixed;
+      margin: 0 auto;
+      left: 25%;
+      right: 25%;
+      bottom: 0;
+      box-shadow: 0 10px 16px 0;
+      background: rgb(247,247,247);background: -moz-linear-gradient(top, rgba(247,247,247,1) 67%, rgba(229,229,229,1) 100%);background: -webkit-gradient(linear, left top, left bottom, color-stop(67%,rgba(247,247,247,1)), color-stop(100%,rgba(229,229,229,1)));background: -webkit-linear-gradient(top, rgba(247,247,247,1) 67%,rgba(229,229,229,1) 100%);background: -o-linear-gradient(top, rgba(247,247,247,1) 67%,rgba(229,229,229,1) 100%);background: -ms-linear-gradient(top, rgba(247,247,247,1) 67%,rgba(229,229,229,1) 100%);background: linear-gradient(to bottom, rgba(247,247,247,1) 67%,rgba(229,229,229,1) 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', endColorstr='#e5e5e5',GradientType=0 );
+      z-index:9999;
+  
+}
+.annolet-tools-menu-item{
+      display: inline;
+      margin:5px;
+      cursor:pointer; 
+      color:black;
+      font-family: sans-serif;
+      text-transform:uppercase;
+      font-size:.8em;
+      background-color:yellow;
+}
+.annolet-tools-menu-item:hover, .annolet-tools-menu-item:active{
+  background-color: yellow;
+  border-radius:10px;
+  color:blue;
+  font-weight:bold;
+}
+
+/*note div box styling*/
+#annolet-note-box{
+  width: 200px;
+  height: 200px;
+  background: lightyellow;
+  border: 1px solid orange;
+  border-radius: 10px;
+  position: fixed;
+  right: 20px;
+  top: 200px;
+  z-index:9999;
+}
+#annolet-note-submit{
+  top: 20%;
+  background: orange;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  z-index:9999;
+}
+#annolet-note-cancel{
+  top: 20%;
+  background: grey;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  z-index:9999;
+}
+#annolet-note-textarea{
+  resize: none;
+  width: inherit;
+  height: inherit;
+  background: none;
+  color: black;
+  font-size: 1.2em;
+  padding: 10px;
+  border: none;
+  z-index:9999;
+}
