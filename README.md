@@ -1,8 +1,7 @@
-# README #
-### What is this repository for? ###
-
+# AnnoLet! # Let me annotate!
+* web annotation tool*
 ###AnnoLet! is a web annotation tool.###
-* A tool to annotate and re-narrate Webpages.
+* A tool to annotate Webpages.
 * It is under development. No release has been made till now.
 * For now only highlight feature works.
 
@@ -23,4 +22,10 @@
 * To get that bookmarklet, Go to this link
 * Follow the instructions.
 
-### Contribution guidelines ###
+###Setting up org-mode in Emacs24+###
+* open emacs and execute key sequence `M-x`.
+* Type `list-packages` hit enter.
+* In list find package `org-mode`.
+* Click on it and install.
+* Restart Emacs.
+* To run org-mode, type `M-x org-mode` .
