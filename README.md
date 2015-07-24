@@ -1,5 +1,4 @@
-# AnnoLet! # Let me annotate!
-* web annotation tool*
+#AnnoLet!# 
 ###AnnoLet! is a web annotation tool.###
 * A tool to annotate Webpages.
 * It is under development. No release has been made till now.
