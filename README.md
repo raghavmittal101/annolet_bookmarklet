@@ -7,7 +7,7 @@
 ### How to set up? ###
 ####Setting up repository####
 * To setup this repository, 
-* go to terminal and execute `git clone https://raghav_mittal@bitbucket.org/raghav_mittal/annolet.git`
+* go to terminal and execute `git clone https://github.com/raghavmittal101/annolet_bookmarklet.git`
 * Now the repo is cloned on to your local machine.
 ####Setting up the Code####
 * To setup the JavaScript Code, download the org-file provided.
