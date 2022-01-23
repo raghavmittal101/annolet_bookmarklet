@@ -7,11 +7,6 @@
 
   To run this program call =annolet_main()= function.
 ------------------------------
-** Motivation/Background
-** Design Idea
-** Functionality
-** Detailed Design
-** Function Test/Unit Test
 
 ** Use of =jQuery.noConflict()=
    To make the program more robust and avoid clash between variables with that of running website
