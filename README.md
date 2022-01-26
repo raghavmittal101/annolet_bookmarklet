@@ -21,6 +21,8 @@
 * To get that bookmarklet, Go to this link
 * Follow the instructions.
 
+![annolet demo](annolet-demo.png)
+
 ### Setting up org-mode in Emacs24+
 * open emacs and execute key sequence `M-x`.
 * Type `list-packages` hit enter.
